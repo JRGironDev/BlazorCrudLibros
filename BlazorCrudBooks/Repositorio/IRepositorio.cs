@@ -13,7 +13,7 @@ namespace BlazorCrudBooks.Repositorio
 
         public Task<Libro> ActualizarLibro(int libroId, Libro actualizarLibro);
 
-        public Task<Libro> ElimianarLibro(int libroId);
+        public Task ElimianarLibro(int libroId);
     }
 }
 

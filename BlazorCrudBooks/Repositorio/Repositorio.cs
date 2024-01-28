@@ -1,6 +1,7 @@
 ﻿using System;
 using BlazorCrudBooks.Data;
 using BlazorCrudBooks.Modelos;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazorCrudBooks.Repositorio
 {
@@ -27,24 +28,43 @@ namespace BlazorCrudBooks.Repositorio
             return libroDesdeBd;
         }
 
-        public Task<Libro> CrearLibro(Libro crearLibro)
+        public async Task<Libro> CrearLibro(Libro crearLibro)
         {
-            throw new NotImplementedException();
+            if (crearLibro != null)
+            {
+                crearLibro.FechaCreacion = DateTime.Now;
+                await _contexto.Libro.AddAsync(crearLibro);
+                await _contexto.SaveChangesAsync();
+                return crearLibro;
+            }
+            else
+            {
+                return new Libro();
+            }
         }
 
-        public Task<Libro> ElimianarLibro(int libroId)
+        public async Task ElimianarLibro(int libroId)
         {
-            throw new NotImplementedException();
+            var libroDesdeBd = await _contexto.Libro.FindAsync(libroId);
+            _contexto.Remove(libroDesdeBd);
+            await _contexto.SaveChangesAsync();
+            
         }
 
-        public Task<Libro> GetLibroId(int libroId)
+        public async Task<Libro> GetLibroId(int libroId)
         {
-            throw new NotImplementedException();
+            var libroDesdeBd = await _contexto.Libro.FindAsync(libroId);
+            if (libroDesdeBd == null)
+            {
+                return new Libro();
+            }
+
+            return libroDesdeBd;
         }
 
         public Task<List<Libro>> GetLibros()
         {
-            throw new NotImplementedException();
+            return _contexto.Libro.ToListAsync();
         }
     }
 }
