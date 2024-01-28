@@ -1,0 +1,65 @@
+﻿@page "/libros"
+@using BlazorCrudBooks.Modelos
+@using BlazorCrudBooks.Repositorio
+@inject IRepositorio Repositorio
+
+<h3>ListaLibros</h3>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <h2 class="text-dark">Lista de Libros</h2>
+        </div>
+    </div>
+    <div class="caed-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Desripción</th>
+                    <th>Autor</th>
+                    <th>Páginas</th>
+                    <th>Precio</th>
+                    <th>Fecha de Creación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var libro in listaLibros)
+                {
+                    <tr>
+                        <td>@libro.Id</td>
+                        <td>@libro.Tituto</td>
+                        <td>@libro.Descripcion</td>
+                        <td>@libro.Autor</td>
+                        <td>@libro.Paginas</td>
+                        <td>@libro.Precio</td>
+                        <td>@libro.FechaCreacion</td>
+                        <td>
+                            <a hred="editar-libro/@libro.Id" class="btn btn-success btn-sm"><span class="oi oi-plus" aria-hidden="true"></span>Editar</a>
+                            <button @onclick="@(() => BorrarLibro(libro.Id))" class="btn btn-danger btn-sm"><span class="oi oi-delete" aria-hidden="true"></span>Borrar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private List<Libro> listaLibros = new List<Libro>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaLibros = await Repositorio.GetLibros();
+    }
+
+    //Método para borrar libros
+    private async Task BorrarLibro(int libroId)
+    {
+
+    }
+
+}
+

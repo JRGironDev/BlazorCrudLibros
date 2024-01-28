@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using BlazorCrudBooks.Data;
 using Microsoft.EntityFrameworkCore;
+using BlazorCrudBooks.Repositorio;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+// Se agrega como inyección de dependencia al repositorio
+builder.Services.AddScoped<IRepositorio, Repositorio>();
 
 var app = builder.Build();
 

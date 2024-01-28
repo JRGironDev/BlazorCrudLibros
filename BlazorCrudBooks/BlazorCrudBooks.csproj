@@ -13,11 +13,13 @@
     <None Remove="Modelos\" />
     <None Remove="Data\" />
     <None Remove="Repositorio\" />
+    <None Remove="Pages\Libros\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modelos\" />
     <Folder Include="Data\" />
     <Folder Include="Repositorio\" />
+    <Folder Include="Pages\Libros\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
