@@ -37,7 +37,7 @@
                         <td>@libro.Precio</td>
                         <td>@libro.FechaCreacion</td>
                         <td>
-                            <a hred="editar-libro/@libro.Id" class="btn btn-success btn-sm"><span class="oi oi-plus" aria-hidden="true"></span> Editar</a>
+                            <a href="editar-libro/@libro.Id" class="btn btn-success btn-sm"><span class="oi oi-plus" aria-hidden="true"></span> Editar</a>
                             <button @onclick="@(() => BorrarLibro(libro.Id))" class="btn btn-danger btn-sm"><span class="oi oi-delete" aria-hidden="true"></span> Borrar</button>
                         </td>
                     </tr>
@@ -58,7 +58,10 @@
     //Método para borrar libros
     private async Task BorrarLibro(int libroId)
     {
+        await Repositorio.ElimianarLibro(libroId);
 
+        //Actualizar interfaz libros
+        listaLibros = await Repositorio.GetLibros(); 
     }
 
 }
